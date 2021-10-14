@@ -1,5 +1,4 @@
 import * as AWS from 'aws-sdk';
-import { resolve } from 'path';
 import { v4 as uuid } from 'uuid';
 
 export class DynameDb {
@@ -46,8 +45,8 @@ export class DynameDb {
                     phone: phone
                 }
             };
-            let record = this.client.put(
-                params, (err, data) => {
+            this.client.put(
+                params, (err) => {
                     if (err)
                         reject(err)
                     else
@@ -64,8 +63,8 @@ export class DynameDb {
                     id: id
                 }
             };
-            let record = this.client.delete(
-                params, (err, data) => {
+            this.client.delete(
+                params, (err) => {
                     if (err)
                         reject(err)
                     else

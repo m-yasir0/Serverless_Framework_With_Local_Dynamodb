@@ -6,12 +6,12 @@ import getAllUsers from '@functions/getAllUsers';
 import getUserById from '@functions/getUserById';
 
 const serverlessConfiguration: AWS = {
-  service: 'part-1',
+  service: 'dynamodb-crud-by-myasir',
   frameworkVersion: '2',
   custom: {
     dynamodb: {
       stages: [
-        'dev'
+        'live'
       ],
       region: 'us-east-1',
       start: {
@@ -34,10 +34,9 @@ const serverlessConfiguration: AWS = {
   },
   plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dynamodb-local'],
   provider: {
-    // stage: 'dev',
+    stage: 'live',
     name: 'aws',
     runtime: 'nodejs14.x',
-    profile: 'Muhammad_yasir',
     region: 'us-east-1',
     apiGateway: {
       minimumCompressionSize: 1024,
