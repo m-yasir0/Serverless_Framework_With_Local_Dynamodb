@@ -1,14 +1,14 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
+import createUser from '@functions/createUser';
 
 const serverlessConfiguration: AWS = {
-  service: 'part-2',
+  service: 'part-1',
   frameworkVersion: '2',
   custom: {
     dynamodb: {
       stages: [
-        'test'
+        'dev'
       ],
       region: 'eu-west-1',
       start: {
@@ -31,7 +31,7 @@ const serverlessConfiguration: AWS = {
   },
   plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dynamodb-local'],
   provider: {
-    stage: 'deploy',
+    // stage: 'dev',
     name: 'aws',
     runtime: 'nodejs14.x',
     profile: 'Muhammad_yasir',
@@ -44,7 +44,7 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       AWS_ACCOUNT_ID: '218767131295',
-      USER_TABLE: 'userTable'
+      USER_TABLE: 'Users'
     },
     lambdaHashingVersion: '20201221',
     iamRoleStatements:
@@ -73,25 +73,25 @@ const serverlessConfiguration: AWS = {
     // ],
   },
   // import the function via paths
-  functions: { hello },
+  functions: { createUser },
 
-  "resources": {
-    "Resources": {
-      "TodoTable": {
-        "Type": "AWS::DynamoDB::Table",
-        "Properties": {
-          "TableName": "TodoTable",
-          "BillingMode": "PAY_PER_REQUEST",
-          "AttributeDefinitions": [
+  resources: {
+    Resources: {
+      Users: {
+        Type: ' AWS::DynamoDB::Table',
+        Properties: {
+          TableName: 'Users',
+          BillingMode: 'PAY_PER_REQUEST',
+          AttributeDefinitions: [
             {
-              "AttributeName": "id",
-              "AttributeType": "S"
+              AttributeName: 'id',
+              AttributeType: 'S'
             }
           ],
-          "KeySchema": [
+          KeySchema: [
             {
-              "AttributeName": "id",
-              "KeyType": "HASH"
+              AttributeName: 'id',
+              KeyType: 'HASH'
             }
           ]
         }
