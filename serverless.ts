@@ -1,6 +1,9 @@
 import type { AWS } from '@serverless/typescript';
 
 import createUser from '@functions/createUser';
+import deleteUser from '@functions/deleteUser';
+import getAllUsers from '@functions/getAllUsers';
+import getUserById from '@functions/getUserById';
 
 const serverlessConfiguration: AWS = {
   service: 'part-1',
@@ -10,7 +13,7 @@ const serverlessConfiguration: AWS = {
       stages: [
         'dev'
       ],
-      region: 'eu-west-1',
+      region: 'us-east-1',
       start: {
         port: 8000,
         migrate: true,
@@ -35,7 +38,7 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs14.x',
     profile: 'Muhammad_yasir',
-    region: 'eu-west-1',
+    region: 'us-east-1',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -73,12 +76,12 @@ const serverlessConfiguration: AWS = {
     // ],
   },
   // import the function via paths
-  functions: { createUser },
+  functions: { createUser, deleteUser, getAllUsers, getUserById },
 
   resources: {
     Resources: {
       Users: {
-        Type: ' AWS::DynamoDB::Table',
+        Type: 'AWS::DynamoDB::Table',
         Properties: {
           TableName: 'Users',
           BillingMode: 'PAY_PER_REQUEST',

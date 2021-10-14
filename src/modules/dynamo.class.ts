@@ -1,11 +1,12 @@
 import * as AWS from 'aws-sdk';
+import { resolve } from 'path';
 import { v4 as uuid } from 'uuid';
 
 export class DynameDb {
     client: any;
     table: string;
     constructor(IS_OFFLINE: string | boolean, table: string) {
-        if (IS_OFFLINE == true) {
+        if (IS_OFFLINE) {
             let options = {
                 region: 'localhost',
                 endpoint: 'http://localhost:8000'
@@ -35,22 +36,43 @@ export class DynameDb {
     createRecord(body: { [key: string]: any }) {
         const { name, address, phone } = body;
         const id = uuid();
-        let record = this.client.put({
-            TableName: this.table, Item: {
-                id: id,
-                name: name,
-                address: address,
-                phone: phone
-            }
-        }).promise();
-        return record;
+        let promise = new Promise((resolve, reject) => {
+            let params = {
+                TableName: this.table,
+                Item: {
+                    id: id,
+                    name: name,
+                    address: address,
+                    phone: phone
+                }
+            };
+            let record = this.client.put(
+                params, (err, data) => {
+                    if (err)
+                        reject(err)
+                    else
+                        resolve(params.Item)
+                }
+            );
+        })
+        return promise;
     }
     deleteRecordById(id: string) {
-        let record = this.client.delete({
-            TableName: this.table, Key: {
-                id: id
-            }
-        }).promise();
-        return record;
+        let promise = new Promise((resolve, reject) => {
+            let params = {
+                TableName: this.table, Key: {
+                    id: id
+                }
+            };
+            let record = this.client.delete(
+                params, (err, data) => {
+                    if (err)
+                        reject(err)
+                    else
+                        resolve(`Record deleted: ${params.Key.id}`)
+                }
+            );
+        })
+        return promise;
     }
 }

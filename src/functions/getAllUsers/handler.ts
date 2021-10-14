@@ -5,11 +5,11 @@ import { DynameDb } from 'src/modules/dynamo.class';
 
 import schema from './schema';
 
-const deleteRecordById: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const getRecordById: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
     try {
-        let record = await new DynameDb(process.env.IS_OFFLINE, 'Users').deleteRecordById(event.pathParameters?.id);
+        let record = await new DynameDb(process.env.IS_OFFLINE, 'Users').getAllRecords();
         return _200_formatJSONResponse({
-            Deleted_User: record,
+            Users: record,
         });
     } catch (e) {
         return _400_formatJSONResponse({
@@ -19,4 +19,4 @@ const deleteRecordById: ValidatedEventAPIGatewayProxyEvent<typeof schema> = asyn
 
 }
 
-export const main = middyfy(deleteRecordById);
+export const main = middyfy(getRecordById);

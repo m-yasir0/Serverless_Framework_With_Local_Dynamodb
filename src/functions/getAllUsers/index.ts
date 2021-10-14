@@ -5,8 +5,8 @@ export default {
     events: [
         {
             http: {
-                method: 'delete',
-                path: 'deleteUser/{id}',
+                method: 'get',
+                path: 'Users',
             }
         }
     ]
