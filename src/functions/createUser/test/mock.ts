@@ -1,5 +1,6 @@
+
 export default {
-  "body": "{name: 'test name',address: 'address 123',phone: '0323213213213'}",
+  "body": { name: 'test name', address: 'address 123', phone: '0323213213213' },
   "headers": {
     "Content-Type": "application/json",
     "User-Agent": "PostmanRuntime/7.28.4",
@@ -75,7 +76,7 @@ export default {
     "requestTimeEpoch": 1634220961144,
     "resourceId": "offlineContext_resourceId",
     "resourcePath": "/live/createUser",
-    "stage": "live"
+    "stage": "live",
   },
   "resource": "/createUser"
 }

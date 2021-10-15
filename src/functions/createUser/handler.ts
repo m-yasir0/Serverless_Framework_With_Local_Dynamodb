@@ -1,11 +1,11 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway';
 import { _200_formatJSONResponse, _400_formatJSONResponse } from '@libs/apiGateway';
-import { middyfy } from '@libs/lambda';
-import { DynameDb } from 'src/modules/dynamo.class';
+//import { middyfy } from '@libs/lambda';
+import { DynameDb } from '../../common/dynamo.class';
 
 import schema from './schema';
 
-const createRecord: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+export const createRecord: ValidatedEventAPIGatewayProxyEvent<typeof schema> | any = async (event) => {
     try {
         let record = await new DynameDb(process.env.IS_OFFLINE, 'Users').createRecord(event.body);
         return _200_formatJSONResponse({
@@ -19,4 +19,4 @@ const createRecord: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (e
 
 }
 
-export const main = middyfy(createRecord);
+//export const main = middyfy(createRecord);

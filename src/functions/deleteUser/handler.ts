@@ -1,7 +1,7 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway';
 import { _200_formatJSONResponse, _400_formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-import { DynameDb } from 'src/modules/dynamo.class';
+import { DynameDb } from '../../common/dynamo.class';
 
 import schema from './schema';
 

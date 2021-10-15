@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 export class DynameDb {
     client: any;
     table: string;
-    constructor(IS_OFFLINE: string | boolean, table: string) {
+    constructor(IS_OFFLINE: string | boolean = true, table: string) {
         if (IS_OFFLINE) {
             let options = {
                 region: 'localhost',
