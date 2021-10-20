@@ -1757,6 +1757,10 @@ var DynameDb = class {
       this.client = new AWS.DynamoDB.DocumentClient();
     }
     this.table = table;
+    return this;
+  }
+  getDynamoInstance() {
+    return this.client;
   }
   getAllRecords() {
     let body = this.client.scan({ TableName: this.table }).promise();

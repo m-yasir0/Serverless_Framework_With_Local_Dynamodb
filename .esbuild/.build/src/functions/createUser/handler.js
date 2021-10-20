@@ -1705,6 +1705,7 @@ var require_dist = __commonJS({
 
 // src/functions/createUser/handler.ts
 __export(exports, {
+  createRecord: () => createRecord,
   main: () => main
 });
 
@@ -1757,6 +1758,10 @@ var DynameDb = class {
       this.client = new AWS.DynamoDB.DocumentClient();
     }
     this.table = table;
+    return this;
+  }
+  getDynamoInstance() {
+    return this.client;
   }
   getAllRecords() {
     let body = this.client.scan({ TableName: this.table }).promise();
@@ -1828,6 +1833,7 @@ var createRecord = async (event) => {
 var main = middyfy(createRecord);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  createRecord,
   main
 });
 /*!

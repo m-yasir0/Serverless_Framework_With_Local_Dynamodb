@@ -18,8 +18,13 @@ export class DynameDb {
 
         // set table
         this.table = table;
+
+        return this;
     }
 
+    getDynamoInstance() {
+        return this.client;
+    }
     getAllRecords() {
         let body = this.client.scan({ TableName: this.table }).promise();
         return body;
