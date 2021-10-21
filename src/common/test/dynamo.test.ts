@@ -5,7 +5,7 @@ describe("Test dynamodb class", () => {
     it("Obj tobe instance of DynamoDb", () => {
         expect(obj instanceof DynameDb).toBe(true);
     });
-    it("Obj should have dynamodocument client instance", () => {
+    it("Obj instance should have getter method to get dynamodocument instance", () => {
         expect(typeof obj.getDynamoInstance()).toBe("object")
     })
 })

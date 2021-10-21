@@ -6,7 +6,7 @@ import { DynameDb } from '../../common/dynamo.class';
 
 // import schema from './schema';
 
-export const createRecord: Handler = async (event) => {
+const createRecord: Handler = async (event) => {
     try {
         let record = await new DynameDb(process.env.IS_OFFLINE, 'Users').createRecord(event.body);
         return _200_formatJSONResponse({
