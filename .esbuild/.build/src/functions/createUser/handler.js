@@ -1705,7 +1705,6 @@ var require_dist = __commonJS({
 
 // src/functions/createUser/handler.ts
 __export(exports, {
-  createRecord: () => createRecord,
   main: () => main
 });
 
@@ -1833,7 +1832,6 @@ var createRecord = async (event) => {
 var main = middyfy(createRecord);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  createRecord,
   main
 });
 /*!
