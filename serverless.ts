@@ -58,22 +58,6 @@ const serverlessConfiguration: AWS = {
           'arn:aws:dynamodb:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:table/${self:provider.environment.USER_TABLE}',
       },
     ],
-    // iamRoleStatements: [
-    //   {
-    //     Effect: 'Allow',
-    //     Action: [
-    //       {
-    //         dynamodb: '*'
-    //       },
-    //       {
-    //         s3: '*'
-    //       },
-    //       {
-    //         ses: '*'
-    //       },
-    //     ],
-    //   }
-    // ],
   },
   // import the function via paths
   functions: { createUser, deleteUser, getAllUsers, getUserById },
