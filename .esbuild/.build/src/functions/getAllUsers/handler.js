@@ -1817,7 +1817,7 @@ var DynameDb = class {
 };
 
 // src/functions/getAllUsers/handler.ts
-var getRecordById = async (event) => {
+var getRecordById = async () => {
   try {
     let record = await new DynameDb(process.env.IS_OFFLINE, "Users").getAllRecords();
     return _200_formatJSONResponse({

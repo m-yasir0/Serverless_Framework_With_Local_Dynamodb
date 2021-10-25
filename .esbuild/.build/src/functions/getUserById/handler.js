@@ -1721,6 +1721,12 @@ var _400_formatJSONResponse = (response) => {
     body: JSON.stringify(response)
   };
 };
+var _404_formatJSONResponse = (response) => {
+  return {
+    statusCode: 404,
+    body: JSON.stringify(response)
+  };
+};
 
 // src/libs/lambda.ts
 var import_core = __toModule(require_core());
@@ -1821,9 +1827,15 @@ var getRecordById = async (event) => {
   var _a;
   try {
     let record = await new DynameDb(process.env.IS_OFFLINE, "Users").getRecordById((_a = event.pathParameters) == null ? void 0 : _a.id);
-    return _200_formatJSONResponse({
-      User: record
-    });
+    if (Object.keys(record).length == 0) {
+      return _404_formatJSONResponse({
+        User: record
+      });
+    } else {
+      return _200_formatJSONResponse({
+        User: record
+      });
+    }
   } catch (e) {
     return _400_formatJSONResponse({
       Error: e

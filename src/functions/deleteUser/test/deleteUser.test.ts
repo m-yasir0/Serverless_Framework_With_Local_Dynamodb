@@ -1,7 +1,7 @@
-import { main } from '@functions/createUser/handler';
+import { main } from '@functions/deleteUser/handler';
 import { APIGatewayProxyResult } from 'aws-lambda';
 import mock from './mock';
-test('Entered Correct Body. Event should return 200, with a body string', async () => {
+test('Id is passed in path Parameters, should return a response 200', async () => {
   let response: APIGatewayProxyResult = <APIGatewayProxyResult>(
     await main(mock, null, null)
   );

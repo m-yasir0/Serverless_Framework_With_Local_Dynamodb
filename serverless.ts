@@ -10,17 +10,14 @@ const serverlessConfiguration: AWS = {
   frameworkVersion: '2',
   custom: {
     dynamodb: {
-      stages: [
-        'live'
-      ],
+      stages: ['live'],
       region: 'us-east-1',
       start: {
         port: 8000,
         migrate: true,
         inMemory: true,
-        seed: true
+        seed: true,
       },
-
     },
     esbuild: {
       bundle: true,
@@ -32,7 +29,11 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
     },
   },
-  plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-dynamodb-local'],
+  plugins: [
+    'serverless-esbuild',
+    'serverless-offline',
+    'serverless-dynamodb-local',
+  ],
   provider: {
     stage: 'live',
     name: 'aws',
@@ -46,17 +47,17 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       AWS_ACCOUNT_ID: '218767131295',
-      USER_TABLE: 'Users'
+      USER_TABLE: 'Users',
     },
     lambdaHashingVersion: '20201221',
-    iamRoleStatements:
-      [
-        {
-          Effect: 'Allow',
-          Action: ['dynamodb:*'],
-          Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:table/${self:provider.environment.USER_TABLE}'
-        }
-      ],
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: ['dynamodb:*'],
+        Resource:
+          'arn:aws:dynamodb:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:table/${self:provider.environment.USER_TABLE}',
+      },
+    ],
     // iamRoleStatements: [
     //   {
     //     Effect: 'Allow',
@@ -87,20 +88,19 @@ const serverlessConfiguration: AWS = {
           AttributeDefinitions: [
             {
               AttributeName: 'id',
-              AttributeType: 'S'
-            }
+              AttributeType: 'S',
+            },
           ],
           KeySchema: [
             {
               AttributeName: 'id',
-              KeyType: 'HASH'
-            }
-          ]
-        }
-      }
-    }
-  }
-
+              KeyType: 'HASH',
+            },
+          ],
+        },
+      },
+    },
+  },
 };
 
 module.exports = serverlessConfiguration;
