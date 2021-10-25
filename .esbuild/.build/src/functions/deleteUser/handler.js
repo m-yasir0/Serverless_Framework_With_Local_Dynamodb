@@ -1746,7 +1746,10 @@ var parse = import_dist.default.parse;
 
 // src/common/dynamo.class.ts
 var DynameDb = class {
-  constructor(IS_OFFLINE = true, table) {
+  constructor(IS_OFFLINE, table) {
+    console.log(process.env);
+    if (process.env.NODE_ENV == "test")
+      IS_OFFLINE = true;
     if (IS_OFFLINE) {
       let options = {
         region: "localhost",

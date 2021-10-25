@@ -1,10 +1,11 @@
 import * as AWS from 'aws-sdk';
 import { v4 as uuid } from 'uuid';
-
 export class DynameDb {
   client: any;
   table: string;
-  constructor(IS_OFFLINE: string | boolean = true, table: string) {
+  constructor(IS_OFFLINE: string | boolean, table: string) {
+    console.log(process.env);
+    if (process.env.NODE_ENV == 'test') IS_OFFLINE = true;
     if (IS_OFFLINE) {
       let options = {
         region: 'localhost',

@@ -1746,7 +1746,10 @@ var parse = import_dist.default.parse;
 
 // src/common/dynamo.class.ts
 var DynameDb = class {
-  constructor(IS_OFFLINE = true, table) {
+  constructor(IS_OFFLINE, table) {
+    console.log(process.env);
+    if (process.env.NODE_ENV == "test")
+      IS_OFFLINE = true;
     if (IS_OFFLINE) {
       let options = {
         region: "localhost",
@@ -1817,7 +1820,8 @@ var DynameDb = class {
 };
 
 // src/functions/getAllUsers/handler.ts
-var getRecordById = async () => {
+var getRecordById = async (event) => {
+  event;
   try {
     let record = await new DynameDb(process.env.IS_OFFLINE, "Users").getAllRecords();
     return _200_formatJSONResponse({
